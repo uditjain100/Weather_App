@@ -23,7 +23,9 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import udit.programmer.co.weatherapp.Common.Common
 import udit.programmer.co.weatherapp.Common.Helper
 import udit.programmer.co.weatherapp.Models.OpenWeatherMap
 import java.security.Permission
@@ -47,6 +49,12 @@ class MainActivity : AppCompatActivity() {
         override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
             for (location in result.locations) {
+                GetWeather().execute(
+                    Common.apiRequest(
+                        location.latitude.toString(),
+                        location.longitude.toString()
+                    )
+                )
                 latitude_layout.text = location.latitude.toString()
                 longitude_layout.text = location.longitude.toString()
             }
@@ -83,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     override fun onStart() {
         super.onStart()
         requestLocation()
@@ -103,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         stopLocationUpdates()
     }
 
+    @SuppressLint("StaticFieldLeak")
     private inner class GetWeather : AsyncTask<String, Unit, String>() {
 
         internal var pd = ProgressDialog(this@MainActivity)
@@ -126,6 +134,16 @@ class MainActivity : AppCompatActivity() {
             val mType = object : TypeToken<OpenWeatherMap>() {}.type
             openWeatherMap = Gson().fromJson(result, mType)
             pd.dismiss()
+
+            txtCity.text = "Place : ${openWeatherMap.name} , ${openWeatherMap.sys!!.country}"
+            txtLastUpdate.text = "Last Updated : ${Common.dateNow}"
+            txtDescription.text = "Description : ${openWeatherMap.weatherItem!![0].description}"
+            txtTime.text =
+                "Time : ${Common.unixTimeStampToDateTime(openWeatherMap.sys!!.sunrise!!.toDouble())}"
+            txtHumidity.text = "Humidity : ${openWeatherMap.main!!.humidity}"
+            txtCelcius.text = "Temperature : ${openWeatherMap.main!!.temp}"
+            Picasso.get().load(Common.getImage(openWeatherMap.weatherItem!![0].icon!!))
+                .into(imageeView)
         }
 
     }
@@ -158,6 +176,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopLocationUpdates() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        txtCity.text = "Place : --"
+        txtLastUpdate.text = "Last Updated : --"
+        txtDescription.text = "Description : --"
+        txtTime.text = "Time : --"
+        txtHumidity.text = "Humidity : --"
+        txtCelcius.text = "Temperature : --"
+        Picasso.get().load(R.drawable.common_google_signin_btn_text_dark).into(imageeView)
     }
 
     private fun showDialog() {

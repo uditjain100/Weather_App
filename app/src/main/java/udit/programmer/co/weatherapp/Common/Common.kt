@@ -7,9 +7,9 @@ import java.util.*
 
 object Common {
     val API_KEY = "9e85de56e43bc0220e766c8203d183ed"
-    val API_LINK = "http://api.openweathermap.org/data/2.5/"
+    val API_LINK = "http://api.openweathermap.org/data/2.5/weather"
     fun apiRequest(lat: String, lan: String): String {
-        return StringBuilder(API_LINK).append("?lat=$lat&lon=$lan&APPID=$API_KEY&units=metric")
+        return StringBuilder(API_LINK).append("?lat=${lat}&lon=${lan}&appid=${API_KEY}&units=metric")
             .toString()
     }
 
@@ -19,7 +19,7 @@ object Common {
         return SimpleDateFormat("HH:mm").format(date)
     }
 
-    fun getImage(icon: Image): String {
+    fun getImage(icon: String): String {
         return "http://openweathermap.org/img/w/$icon.png"
     }
 
