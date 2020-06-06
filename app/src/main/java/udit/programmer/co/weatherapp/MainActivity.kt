@@ -1,11 +1,13 @@
 package udit.programmer.co.weatherapp
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -19,7 +21,11 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
+import udit.programmer.co.weatherapp.Common.Helper
+import udit.programmer.co.weatherapp.Models.OpenWeatherMap
 import java.security.Permission
 import java.util.jar.Manifest
 
@@ -28,18 +34,15 @@ class MainActivity : AppCompatActivity() {
     val fusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
     }
-
     val locationManager by lazy {
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
-
     val locationRequest by lazy {
         LocationRequest().setInterval(2000)
             .setFastestInterval(2000)
             .setSmallestDisplacement(1f)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
     }
-
     val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    var openWeatherMap = OpenWeatherMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +101,33 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stopLocationUpdates()
+    }
+
+    private inner class GetWeather : AsyncTask<String, Unit, String>() {
+
+        internal var pd = ProgressDialog(this@MainActivity)
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            pd.setTitle("Please Wait ... ")
+            pd.show()
+        }
+
+        override fun doInBackground(vararg params: String?): String {
+            return Helper().GetHttpDataHandler(params[0])
+        }
+
+        override fun onPostExecute(result: String) {
+            super.onPostExecute(result)
+            if (result.contains("Error : Not found city")) {
+                pd.dismiss()
+                return
+            }
+            val mType = object : TypeToken<OpenWeatherMap>() {}.type
+            openWeatherMap = Gson().fromJson(result, mType)
+            pd.dismiss()
+        }
+
     }
 
     override fun onRequestPermissionsResult(
