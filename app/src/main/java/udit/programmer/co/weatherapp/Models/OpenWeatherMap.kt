@@ -1,12 +1,8 @@
 package udit.programmer.co.weatherapp.Models
 
-import android.app.ProgressDialog
-import android.os.AsyncTask
-import java.util.*
-
 class OpenWeatherMap {
     var coord: Coord? = null
-    var weatherItem: List<WeatherItem>? = null
+    var weather: List<Weather>? = null
     var base: String? = null
     var main: Main? = null
     var wind: Wind? = null
@@ -21,7 +17,7 @@ class OpenWeatherMap {
     constructor()
     constructor(
         coord: Coord,
-        weatherItem: List<WeatherItem>,
+        weather: List<Weather>,
         base: String,
         main: Main,
         wind: Wind,
@@ -34,7 +30,7 @@ class OpenWeatherMap {
         cod: Int
     ) {
         this.coord = coord
-        this.weatherItem = weatherItem
+        this.weather = weather
         this.base = base
         this.main = main
         this.wind = wind

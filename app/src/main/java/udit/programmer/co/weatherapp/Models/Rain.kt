@@ -4,7 +4,7 @@ data class Rain(
     val dt: Int? = null,
     val coord: Coord? = null,
     val timezone: Int? = null,
-    val weather: List<WeatherItem?>? = null,
+    val weather: List<Weather?>? = null,
     val name: String? = null,
     val cod: Int? = null,
     val main: Main? = null,

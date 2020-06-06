@@ -12,11 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.provider.Settings.Secure.isLocationProviderEnabled
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -28,8 +26,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import udit.programmer.co.weatherapp.Common.Common
 import udit.programmer.co.weatherapp.Common.Helper
 import udit.programmer.co.weatherapp.Models.OpenWeatherMap
-import java.security.Permission
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,8 +47,8 @@ class MainActivity : AppCompatActivity() {
             for (location in result.locations) {
                 GetWeather().execute(
                     Common.apiRequest(
-                        location.latitude.toString(),
-                        location.longitude.toString()
+                        location.latitude.toInt().toString(),
+                        location.longitude.toInt().toString()
                     )
                 )
                 latitude_layout.text = location.latitude.toString()
@@ -125,24 +121,24 @@ class MainActivity : AppCompatActivity() {
             return Helper().GetHttpDataHandler(params[0])
         }
 
-        override fun onPostExecute(result: String) {
+        override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            if (result.contains("Error : Not found city")) {
+            if (result!!.contains("Error: Not found city")) {
                 pd.dismiss()
                 return
             }
             val mType = object : TypeToken<OpenWeatherMap>() {}.type
-            openWeatherMap = Gson().fromJson(result, mType)
+            openWeatherMap = Gson().fromJson<OpenWeatherMap>(result, mType)
             pd.dismiss()
 
             txtCity.text = "Place : ${openWeatherMap.name} , ${openWeatherMap.sys!!.country}"
             txtLastUpdate.text = "Last Updated : ${Common.dateNow}"
-            txtDescription.text = "Description : ${openWeatherMap.weatherItem!![0].description}"
+            txtDescription.text = "Description : ${openWeatherMap.weather!![0].description}"
             txtTime.text =
                 "Time : ${Common.unixTimeStampToDateTime(openWeatherMap.sys!!.sunrise!!.toDouble())}"
             txtHumidity.text = "Humidity : ${openWeatherMap.main!!.humidity}"
-            txtCelcius.text = "Temperature : ${openWeatherMap.main!!.temp}"
-            Picasso.get().load(Common.getImage(openWeatherMap.weatherItem!![0].icon!!))
+            txtCelcius.text = "Temperature : ${openWeatherMap.main!!.temp} C"
+            Picasso.get().load(Common.getImage(openWeatherMap.weather!![0].icon!!))
                 .into(imageeView)
         }
 

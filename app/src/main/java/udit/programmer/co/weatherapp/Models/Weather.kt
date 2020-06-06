@@ -1,6 +1,6 @@
 package udit.programmer.co.weatherapp.Models
 
-data class WeatherItem(
+data class Weather(
     val icon: String? = null,
     val description: String? = null,
     val main: String? = null,
