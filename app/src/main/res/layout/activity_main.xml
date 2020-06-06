@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Yellow"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -41,98 +40,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_centerInParent="true"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="250dp"-->
-    <!--            android:layout_height="50dp"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:layout_marginBottom="5sp"-->
-    <!--            android:background="@color/colorAccent"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="horizontal">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Latitude"-->
-    <!--                android:textAlignment="center"-->
-    <!--                android:textSize="20dp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginLeft="5dp"-->
-    <!--                android:layout_marginRight="5dp"-->
-    <!--                android:text=":"-->
-    <!--                android:textSize="20dp"-->
-    <!--                android:textStyle="bold" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Longitude"-->
-    <!--                android:textAlignment="center"-->
-    <!--                android:textSize="20dp" />-->
-
-    <!--        </LinearLayout>-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="250dp"-->
-    <!--            android:layout_height="50dp"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:background="@color/CadetBlue"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="horizontal">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/latitude_layout"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Latitude"-->
-    <!--                android:textAlignment="center"-->
-    <!--                android:textSize="20dp" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/colon_layout"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginLeft="5dp"-->
-    <!--                android:layout_marginRight="5dp"-->
-    <!--                android:text=":"-->
-    <!--                android:textSize="20dp"-->
-    <!--                android:textStyle="bold" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/longitude_layout"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Longitude"-->
-    <!--                android:textAlignment="center"-->
-    <!--                android:textSize="20dp" />-->
-
-    <!--        </LinearLayout>-->
-
-    <!--    </LinearLayout>-->
 
     <androidx.cardview.widget.CardView
         android:layout_width="380dp"
-        android:layout_height="380dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="400dp"
-        android:backgroundTint="@color/DarkGoldenrod"
-        android:elevation="40dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="180dp"
+        android:backgroundTint="@color/DodgerBlue"
+        android:elevation="100dp"
         app:cardCornerRadius="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,7 +66,37 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtLastUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Last Update"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageeView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@color/Gray"
+                android:src="@drawable/ic_launcher_background" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Description"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtHumidity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,11 +107,107 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageeView"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Time"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtCelcius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Celcius"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="70dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5sp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Latitude"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text=":"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Longitude"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/CadetBlue"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/latitude_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Latitude"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/colon_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text=":"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/longitude_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Longitude"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
