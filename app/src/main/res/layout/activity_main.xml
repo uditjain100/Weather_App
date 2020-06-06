@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/Yellow"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -45,8 +46,8 @@
         android:layout_width="380dp"
         android:layout_height="500dp"
         android:layout_marginLeft="7dp"
+        android:backgroundTint="@color/Yellow"
         android:layout_marginTop="180dp"
-        android:backgroundTint="@color/DodgerBlue"
         android:elevation="100dp"
         app:cardCornerRadius="40dp">
 
@@ -82,7 +83,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:background="@color/Gray"
                 android:src="@drawable/ic_launcher_background" />
 
             <com.google.android.material.textview.MaterialTextView
